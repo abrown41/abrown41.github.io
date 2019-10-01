@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Introduction to Python</title>
+<title>Python Basics</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,22 +13116,158 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction-to-Python">Introduction to Python<a class="anchor-link" href="#Introduction-to-Python">&#182;</a></h1><ol>
-<li><p><a href="./Python_Basics.html">Python Basics</a></p>
+<h1 id="Python-Basics">Python Basics<a class="anchor-link"
+href="#Python-Basics">&#182;</a></h1><p><a href="./index.html">Back to all python notes</a></p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ul>
+<li><a href="#introduction">Introduction to Python</a></li>
+<li><a href="#Basics">Calculation basics</a></li>
+<li><p><a href="#errors">A quick note about errors</a></p>
 </li>
-<li><p><a href="./Calculation_Essentials.html">Calculation Essentials</a></p>
+<li><p><a href="#Exercises">Exercises</a></p>
 </li>
-<li><p><a href="./Arrays.html">Arrays</a></p>
-</li>
-<li><p><a href="./Functions.html">Functions</a></p>
-</li>
-<li><p><a href="./Conditions.html">Conditions</a></p>
-</li>
-<li><p><a href="./Loops_and_lists.html">Loops and Lists</a></p>
-</li>
-<li><p><a href="./Plotting.html">Plotting</a></p>
-</li>
-</ol>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='introduction'></a></p>
+<h1 id="Introduction-to-Python">Introduction to Python<a class="anchor-link" href="#Introduction-to-Python">&#182;</a></h1><p>Python is a programming language which is fast becoming one of the most popular in the world. By learning Python, you are not only gaining a valuable tool to help you with your mathematical studies as part of your degree, but also learning the fundamental concepts of programming using a language which is used by innumerable companies, research institutes and ordinary people all over the world.</p>
+<p>We will be using Python like a big calculator to begin with. But the ideas that we introduce we will eventually build into small programs and you are then well on your way to being a competent programmer in a more general sense.</p>
+<p>You will be doing your programming using a service called repl.it. It allows
+you to run python code through a web interface, and for your code to be checked
+automatically. If you <a href="https://repl.it/classroom/invite/1v6mOua">click this link</a> you will be invited to sign up for the service (You should use your QUB email address so I can identify you) and will be able to see the assignments you need to complete.</p>
+<hr>
+<p><a id='Basics'></a></p>
+<h1 id="Calculation-basics">Calculation basics<a class="anchor-link" href="#Calculation-basics">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">9</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">7</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can see that python can perform all the usual numerical operations: addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>) and exponentiation (i.e. 'to the power of': <code>**</code>).</p>
+<p>You can also see the use of the print command to get the code to display certain things. This is important, especially for checking your code.  If you want to print multiple things on the same line you have to separate them with a comma.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also get fancy about it and print out more information. Text can be enclosed in quotes ("double" or 'single' quotes both work, but it's better to use double quotes as that saves problems with apostrophes.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;The variable &#39;a&#39; has a value:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;and the variable &#39;b&#39; is currently assigned the value:&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<p><a id='errors'></a></p>
+<h2 id="A-quick-note-about-errors">A quick note about errors<a class="anchor-link" href="#A-quick-note-about-errors">&#182;</a></h2><p>If you try to do something which the computer doesn't understand, then it will give you an error: for instance entering</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+<p>will give an error message:</p>
+<div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+      <span class="n">File</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3</span>
+        <span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+           <span class="o">^</span>
+    <span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+</pre></div>
+<p>SyntaxError just means there's a problem with the way you've typed the command- and Python helpfully points to the problem with the little "^" character: there's a bracket in the wrong place. In this case it's not particularly useful, but in more complicated expressions this can be extremely useful to locate a typo. You get different errors for different things. For instance entering</p>
+<p>1/0</p>
+<p>will give a 'ZeroDivisionError' (clue is in the name). Then as we move on to more complicated procedures, like defining variables or calling functions, you can get different errors for incorrect usage. <strong>Don't be afraid of the error messages!</strong> Making errors is part and parcel of programming, and most of the time spent in developing large pieces of software is on debugging- finding and fixing the source of errors. It's better that you know you're getting an error- it's worse if you think the code is working and it's actually doing the wrong thing- so embrace the error messages, and use them to help fix your code.</p>
+<p>In particular: <strong>the internet is your friend</strong>, don't be afraid just to copy the error mesage into your search bar and see what information you can find.</p>
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Anyway, back to the code: if you experiment with this idea a little bit you can see we can do all sorts of convoluted calculations. We use brackets both to change the meaning of the calculation, and to make it easy to see what's going on. For instance</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="o">-</span><span class="mi">14</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+<p>does something different from</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="o">-</span><span class="mi">14</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+<p>and different again from</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">14</span><span class="o">-</span><span class="mi">14</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you try these you get different answers. You can add more brackets without changing the meaning- for instance</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">((</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="o">-</span><span class="mi">14</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+<p>performs exactly the same operation as</p>
+<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(((</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span><span class="o">-</span><span class="mi">14</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+<p>but perhaps the second makes it clearer in what order the operations are performed. A good rule of thumb, to practice now is</p>
+<blockquote><p>when it comes to writing code, always err on the side of clarity rather than efficiency.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2><p>To complete the exercises, create an account where prompted below. Once you have signed up, you
+should see the exercises on your dashboard, and you should now be able
+to attempt exercises 0.0 and 0.1</p>
+<p> <iframe frameborder="0" width="100%" height="600px" src="https://repl.it/student_embed/classroom/151559/edfe2d7dbb0eaff3ca3985ba5057e4e1"></iframe> </p>
 
 </div>
 </div>

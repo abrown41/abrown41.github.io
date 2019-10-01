@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Introduction to Python</title>
+<title>Functions- noname</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,22 +13116,319 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction-to-Python">Introduction to Python<a class="anchor-link" href="#Introduction-to-Python">&#182;</a></h1><ol>
-<li><p><a href="./Python_Basics.html">Python Basics</a></p>
+<h1 id="Functions">Functions<a class="anchor-link"
+href="#Functions">&#182;</a></h1><p><a href="./index.html">Back to all python notes</a></p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ul>
+<li><a href="#objective">Reinventing the wheel</a></li>
+<li><a href="#simpleexample">A simple example</a></li>
+<li><a href="#anatomy">The anatomy of a function</a><ul>
+<li><a href="#definition">The definition statement</a></li>
+<li><a href="#functionbody">The function body</a></li>
+<li><a href="#return">The return statement</a></li>
+<li><a href="#call">The function call</a></li>
+</ul>
 </li>
-<li><p><a href="./Calculation_Essentials.html">Calculation Essentials</a></p>
-</li>
-<li><p><a href="./Arrays.html">Arrays</a></p>
-</li>
-<li><p><a href="./Functions.html">Functions</a></p>
-</li>
-<li><p><a href="./Conditions.html">Conditions</a></p>
-</li>
-<li><p><a href="./Loops_and_lists.html">Loops and Lists</a></p>
-</li>
-<li><p><a href="./Plotting.html">Plotting</a></p>
-</li>
-</ol>
+<li><a href="#usefulexample">Not reinventing the wheel</a></li>
+</ul>
+<ul>
+<li><p><a href="#Exercises">Exercises</a></p>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='objective'></a></p>
+<h2 id="Reinventing-the-wheel">Reinventing the wheel<a class="anchor-link" href="#Reinventing-the-wheel">&#182;</a></h2><p>Imagine you were building a bike from scratch. I mean, really from scratch. You would have to harvest rubber from rubber trees to make the tyres. You'd have to invent new tools for working with the materials- spanners and welding torches. You'd have to design a means of converting the vertical motion of your feet into the horizontal motion of the bike. You would literally be <em>reinventing the wheel</em>.</p>
+<p>In programming, when a programmer wants to write a simple calculator program, she does not have to worry about how the calculator will be displayed on screen, or how the numbers will be input because somebody's already invented Microsoft Windows, and somebody already invented the electronic keyboard. She uses these pre-existing tools that perform a very specific, comparitively simple task to build a larger, more complex program.</p>
+<p>We've used this idea already- functions like <code>np.linspace</code>, or <code>np.sin</code> are pieces of code which someone else wrote, that we can then reuse to construct larger pieces of code. We can then package these pieces of code up into new functions which can be used again and again. This stops us duplicating our efforts, and breaks computer programs up into smaller, more understandable functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='simpleexample'></a></p>
+<h3 id="A-simple-example">A simple example<a class="anchor-link" href="#A-simple-example">&#182;</a></h3><p>Suppose we want to evaluate the quadratic equation $y=x^2+3x-2$ for x=3</p>
+<div class="highlight"><pre><span></span><span class="k">print</span> <span class="p">(</span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<p>we saw how to simplifiy this with variables earlier:</p>
+<div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="mi">3</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="mi">4</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<p>But is there a way we can simplify the quadratic itself? We can define a function called <code>quadratic</code> which does all of the calculating for us. The function looks like this:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">quadratic</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then to use the function we can simply type:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">quadratic</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">quadratic</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>16
+26
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So our function takes the number (x), evaluates our quadratic for that value, and gives us back the answer. The idea of a function which takes a variable and gives you back a number should be familiar to you: for the above example you might write</p>
+$$f(x) = x^2+3x-2$$<p>for instance. The input variable is the number $x$: we put in our number, 3 and our function gives us back <em>(returns)</em> the result 16.</p>
+<p>And we aren't limited to one number in, one number out: we might have a function which looks like this:</p>
+$$ f(x,y) = xy^2$$<p>This takes two numbers, $x$ and $y$, and returns a single number. We could implement this in python as follows</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">new_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">new_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>48
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='anatomy'></a></p>
+<h2 id="The-anatomy-of-a-function">The anatomy of a function<a class="anchor-link" href="#The-anatomy-of-a-function">&#182;</a></h2><p><a id='definition'></a></p>
+<h4 id="Definition-statement">Definition statement<a class="anchor-link" href="#Definition-statement">&#182;</a></h4><p>Every function that we define in python starts with <code>def</code> (define). This instructs python that what follows is a function</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_name</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span><span class="n">input2</span><span class="p">):</span>
+</pre></div>
+<p>We follow this with the name of the function. E.G. we've already see functions called 'quadratic' and 'new_function' above. This means that when we later type function_name(3,4) python knows to execute the function we've defined.</p>
+<p>The brackets then contain any input variables. Here we've called them 'input1' and 'input2', but you can see above examples where we've used just a single variable called 'x' or two variables called 'x' and 'y'. <strong>Even if your function doesn't take any input variables, you still need the brackets</strong>.</p>
+<p>We close the statement with a colon ':'. This tells python that the definition statement is complete and what follows is the code we want to execute.</p>
+<p><a id='functionbody'></a></p>
+<h4 id="Function-body">Function body<a class="anchor-link" href="#Function-body">&#182;</a></h4><p>What happens next is one of the unique things about python: the text underneath the definition line must all be <strong>indented</strong> by the same amount until we've finished defining our function: something like this</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1">#more code down here</span>
+</pre></div>
+<p>You see how all of the lines in our definition are indented by four spaces? (four is the python standard) This lets python know which bits of code are part of our definition, and which are just ordinary bits of code. It also means that if you have a big block of code it's easy to follow the logic, because we can see just from the indenting where functions start and end.</p>
+<p>If you are defining functions on repl.it, it will automatically indent for you after you type a function definition i.e. type</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+</pre></div>
+<p>and hit enter and repl will automatically position the cursor four spaces in:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+</pre></div>
+
+<pre><code>    |
+
+</code></pre>
+<p>The function body contains all of the code you want to execute. So for instance, a function which takes two numbers, squares them, sums them together, and then takes the square root of the result would look like</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">complicated_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="n">a_squared</span><span class="o">=</span><span class="n">a</span><span class="o">*</span><span class="n">a</span>
+    <span class="n">b_squared</span><span class="o">=</span><span class="n">b</span><span class="o">*</span><span class="n">b</span>
+    <span class="n">c_squared</span><span class="o">=</span><span class="n">a_squared</span><span class="o">+</span><span class="n">b_squared</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c_squared</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='return'></a></p>
+<h4 id="Return-statement">Return statement<a class="anchor-link" href="#Return-statement">&#182;</a></h4><p>Once we have done all the operations we want to do, we can return a result with the return statement. This is indented the same as the function body. In the above example we return the value of the variable 'c'. This means that if we call the function like this</p>
+<div class="highlight"><pre><span></span><span class="n">y</span><span class="o">=</span><span class="n">complicated_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+<p>the result (5) is stored in the variable <code>y</code>.</p>
+<p><a id='call'></a></p>
+<h4 id="The-function-call">The function call<a class="anchor-link" href="#The-function-call">&#182;</a></h4><p>When you want to use your function, you just type the name of the functon, and the variables you want it to use in brackets</p>
+<div class="highlight"><pre><span></span><span class="n">y</span><span class="o">=</span><span class="n">complicated_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="n">complicated_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">x</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="n">answer</span><span class="o">=</span> <span class="n">complicated_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='usefulexample'></a></p>
+<h2 id="Not-reinventing-the-wheel">Not reinventing the wheel<a class="anchor-link" href="#Not-reinventing-the-wheel">&#182;</a></h2><p>The code belows defines two functions- one calculates $\sin^2$ of a number, the other to find the inverse of a number.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sin_squared</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">s</span><span class="o">*</span><span class="n">s</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can use these functions to define a more complicated function which takes a number and returns the inverse of the sine squared, i.e. $f(x) = 1/(\sin^2 x)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">compound_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">sin_squared</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">invert</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">compound_function</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>50.2137683604
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It would have been possible to do all the steps in the one function, but instead we have avoided repeating ourselves by using the simpler functions we had already defined. <strong>You should always aim to code like this</strong>- instead of making one function which does everything, make smaller functions which do simple things, and then build more complex functions out of these. This makes your code easier to understand, easier to edit, and more resistant to errors.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2>
+<p>Once you have read this information then proceed to try the exercises
+"3.0 Functions" and "2.1 Debug Functions"</p>
+<p> <iframe frameborder="0" width="100%" height="600px" src="https://repl.it/student_embed/classroom/151559/edfe2d7dbb0eaff3ca3985ba5057e4e1"></iframe> </p>
+
 
 </div>
 </div>

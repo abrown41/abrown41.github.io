@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Introduction to Python</title>
+<title>Loops and Lists</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,22 +13116,438 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction-to-Python">Introduction to Python<a class="anchor-link" href="#Introduction-to-Python">&#182;</a></h1><ol>
-<li><p><a href="./Python_Basics.html">Python Basics</a></p>
-</li>
-<li><p><a href="./Calculation_Essentials.html">Calculation Essentials</a></p>
-</li>
-<li><p><a href="./Arrays.html">Arrays</a></p>
-</li>
-<li><p><a href="./Functions.html">Functions</a></p>
-</li>
-<li><p><a href="./Conditions.html">Conditions</a></p>
-</li>
-<li><p><a href="./Loops_and_lists.html">Loops and Lists</a></p>
-</li>
-<li><p><a href="./Plotting.html">Plotting</a></p>
-</li>
-</ol>
+<p><a href="./index.html">Back to all python notes</a></p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ul>
+<li><a href="#flow">And again and again and again...</a></li>
+<li><a href="#for">The anatomy of a for loops</a></li>
+<li><a href="#examples">Some Examples</a></li>
+</ul>
+<ul>
+<li><p><a href="#Exercises">Exercises</a></p>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='flow'></a></p>
+<h1 id="And-again-and-again-and-again...">And again and again and again...<a class="anchor-link" href="#And-again-and-again-and-again...">&#182;</a></h1><p>When we looked at vectors, we saw how python can treat a list of numbers all in one go, instead of doing them one at a time. Occasionally however, we come across problems where we need to go step by step. Take the simple example of calculating the terms of the series $T_n=T_{n-1}^2-3$, where $T_0=1$. Clearly $T_1$ depends on $T_0$, $T_2$ depends on $T_1$ and so forth, so we need to calculate the terms in turn, so that we can calculate successive terms.</p>
+<p>A naive way to do this would be to code each term on a new line:</p>
+<div class="highlight"><pre><span></span><span class="n">T0</span><span class="o">=</span> <span class="mi">1</span>
+<span class="n">T1</span> <span class="o">=</span> <span class="n">T0</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span> 
+<span class="n">T2</span> <span class="o">=</span> <span class="n">T1</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="n">T3</span> <span class="o">=</span> <span class="n">T2</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="o">...</span>
+</pre></div>
+<p>but what if we need T100, or T10000? We don't want to type 10000 lines of code, especially where each line is practically identical to the last.</p>
+<p>Thankfully, computers are good at executing repeated commands. In python we can use a <strong>for loop</strong> to execute a piece of code repeatedly. A good parallel would be a shopping list.</p>
+<div class="highlight"><pre><span></span><span class="n">shopping_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chocolate&#39;</span><span class="p">,</span> <span class="s1">&#39;crisps&#39;</span><span class="p">,</span> <span class="s1">&#39;doughnuts&#39;</span><span class="p">,</span> <span class="s1">&#39;beer&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">shopping_list</span><span class="p">:</span>
+    <span class="n">find</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">pay_for</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">consume</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+<p>The loop structure is perfect, because we want to do exactly the same thing for each item: find it, pay for it and eat it. Notice that we have a variable called <code>item</code> which refers in turn to each item on the list. There's no reason it has to be called item, either: we could have</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+<p>Let's look at the anatomy of the for-loop in more detail.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='for'></a></p>
+<h2 id="For-loops">For-loops<a class="anchor-link" href="#For-loops">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The basic syntax for a for-loop is</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="o">&lt;</span><span class="n">iterator</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="nb">list</span><span class="o">&gt;</span><span class="p">:</span> 
+        <span class="o">&lt;</span><span class="n">command</span> <span class="mi">1</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">command</span> <span class="mi">2</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">command</span> <span class="mi">3</span><span class="o">&gt;</span>
+
+    <span class="o">&lt;</span><span class="n">normal</span> <span class="n">command</span><span class="o">&gt;</span>
+</pre></div>
+<p>Let's take this piece by piece.</p>
+<h3 id="for">for<a class="anchor-link" href="#for">&#182;</a></h3><p>Typing the word <code>for</code> tells python we are going to start a loop. It is a special word in python, just like <code>if</code> or <code>def</code>, so you'll see that the editor highlights the word in blue when you type it</p>
+<h3 id="&lt;iterator&gt;"><code>&lt;iterator&gt;</code><a class="anchor-link" href="#&lt;iterator&gt;">&#182;</a></h3><p>The <code>&lt;iterator&gt;</code> is the variable which changes each time we loop around, like the items on our shopping list. It is common to use <code>i</code> for this variable, as this is also common in mathematical notation: e.g. $\sum\limits_{i=1}^{10}$. I prefer to use <code>ii</code> because if your searching through a big piece of code <code>i</code> will appear in a lot of places- inside other words or variables, whereas <code>ii</code> will only appear where you've used it as an iterator. All of my examples will use <code>ii</code> but you can use whatever name you like.</p>
+<h3 id="in-&lt;list&gt;">in <code>&lt;list&gt;</code><a class="anchor-link" href="#in-&lt;list&gt;">&#182;</a></h3><p>The list is a special type of array in python. Very often we will be using numpy arrays for loops, but python supports more general lists which contain strings (like the shopping list above) or even other lists. If you have a numpy array already defined you can use it as your list, e.g.</p>
+<div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">yval</span> <span class="ow">in</span> <span class="n">y</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">yval</span><span class="p">)</span>
+</pre></div>
+<p>or you can make the arrays on the fly:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+<p>or you can just type in short lists inside square brackets like this:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">25</span><span class="p">]:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+<h3 id=":">:<a class="anchor-link" href="#:">&#182;</a></h3><p>Just like with function definitions and if statements, the for loop statement has to be terminated with a colon. This tells python that the code following is the bit we want to loop. And also like functions and if statements, we indent everything after the colon that we want to be part of the loop. Hence this piece of code</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;Karma&quot;</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="s2">&quot;chameleon&quot;</span><span class="p">)</span>
+</pre></div>
+<p>"karma" gets printed five times, because it's 'in the loop' (indented) but "chameleon" gets printed just once, because it's 'outside the loop' (unindented).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='examples'></a></p>
+<h3 id="Some-Examples">Some Examples<a class="anchor-link" href="#Some-Examples">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello
+hello
+hello
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When python sees the <code>for</code> keyword, it takes the first value of the iterator (<code>ii=1</code>) and then executes all the commands in the for loop, then goes back, updates the iterator (<code>ii=2</code>), and performs the commands again etc. In this example, we haven't actually used the value of the iterator, but change the command from <code>print('hello')</code> to <code>print(ii)</code> and the code will print '1', '2', '3' instead.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;peter&#39;</span><span class="p">,</span><span class="s1">&#39;paul&#39;</span><span class="p">,</span><span class="s1">&#39;percy&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>hello peter
+hello paul
+hello percy
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Simple-recursive-formula">Simple recursive formula<a class="anchor-link" href="#Simple-recursive-formula">&#182;</a></h4><p>Let's take the example from the introduction: we have a series defined by $$T_n=T_{n-1}^2-3$$ and $T_0=1$. Let's say we want the value of $T_{100}$, we can implement this as follows:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T0</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">previous_term</span><span class="o">=</span><span class="n">T0</span>
+<span class="n">upper_limit</span><span class="o">=</span><span class="mi">100</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">upper_limit</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># remember arange doesn&#39;t include the upper limit, so this does up to 100 and stops</span>
+    <span class="n">term</span><span class="o">=</span><span class="n">previous_term</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span> <span class="c1"># calculate the new term using the previous term</span>
+    <span class="n">previous_term</span><span class="o">=</span><span class="n">term</span>      <span class="c1"># update the value of the previous term for the next iteration</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="n">upper_limit</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>T 100 is 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now this is easily verified, because if you work out the second term, it's $T_1=1^2-3=-2$. Then the next term is $T_2=(-2)^2-3=1$, so the series just oscillates back and forth between 1 and -2. Hence the 100th term is $1$ as given by our code, and we can verify this by changing the <code>upper_limit</code> variable in the code above. Also, we can change the code so that instead of printing out only the last term, on each step the code prints out the value.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">T0</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">previous_term</span><span class="o">=</span><span class="n">T0</span>
+<span class="n">upper_limit</span><span class="o">=</span><span class="mi">3</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">upper_limit</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> 
+    <span class="n">term</span><span class="o">=</span><span class="n">previous_term</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">3</span> 
+    <span class="n">previous_term</span><span class="o">=</span><span class="n">term</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="n">ii</span><span class="p">,</span> <span class="s1">&#39;is&#39;</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>T 1 is -2
+T 2 is 1
+T 3 is -2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Array-elements">Array elements<a class="anchor-link" href="#Array-elements">&#182;</a></h4><p>Recall from the arrays tutorial that we can reference an element of a particular array using square brackets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.0
+1.0
+1.5
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For many applications we will be able just to treat the whole varray in one go, just like we did in the array tutorial e.g.</p>
+<div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+<p>But what if we want to do something more sophisticated. For instance, we could take the average of each pair of values in <code>x</code>. (Recall that x will be of the form <code>[0, 0.5, 1, 1.5]</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.25
+1.25
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here instead of looping through the elements of <code>x</code> we create an iterator called ii which first takes the value <code>0</code> and then the value <code>2</code> (<code>np.arange(0,3,2)</code> starts at 0, ends before 3 in steps of 2). So we can trace through the loop. When <code>ii=0</code> the code reads:</p>
+<p><code>print (0.5 * ( x[0] + x[1]) )</code></p>
+<p>and when <code>ii=2</code> the code reads:</p>
+<p><code>print (0.5 * ( x[2] + x[3]) )</code></p>
+<p>You should be able to trace through a loop like this, even just for the first or last few terms to make sure you know exactly what your code is doing. Not also that you have to be careful not to reference elements of the array that aren't there.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.25
+1.25
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">IndexError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-10-4ce7a583997e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">for</span> ii <span class="ansi-green-fg">in</span> np<span class="ansi-blue-fg">.</span>arange<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg">     </span>print <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0.5</span><span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">(</span> x<span class="ansi-blue-fg">[</span>ii<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+</span> x<span class="ansi-blue-fg">[</span>ii<span class="ansi-blue-fg">+</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">IndexError</span>: index 4 is out of bounds for axis 0 with size 4</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we get an error because when the iterator <code>ii=4</code> we are trying to access <code>x[4]</code> whereas the last element of <code>x</code> is <code>x[3]</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2>
+<p>Once you have read this information then proceed to try the exercises on loops and lists.</p>
+<p> <iframe frameborder="0" width="100%" height="600px" src="https://repl.it/student_embed/classroom/151559/edfe2d7dbb0eaff3ca3985ba5057e4e1"></iframe> </p>
 
 </div>
 </div>

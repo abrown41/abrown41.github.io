@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Introduction to Python</title>
+<title>Arrays</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13116,22 +13116,438 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Introduction-to-Python">Introduction to Python<a class="anchor-link" href="#Introduction-to-Python">&#182;</a></h1><ol>
-<li><p><a href="./Python_Basics.html">Python Basics</a></p>
-</li>
-<li><p><a href="./Calculation_Essentials.html">Calculation Essentials</a></p>
-</li>
-<li><p><a href="./Arrays.html">Arrays</a></p>
-</li>
-<li><p><a href="./Functions.html">Functions</a></p>
-</li>
-<li><p><a href="./Conditions.html">Conditions</a></p>
-</li>
-<li><p><a href="./Loops_and_lists.html">Loops and Lists</a></p>
-</li>
-<li><p><a href="./Plotting.html">Plotting</a></p>
-</li>
-</ol>
+<h1 id="Arrays">Arrays<a class="anchor-link" href="#Arrays">&#182;</a></h1><p><a href="./index.html">Back to all python notes</a></p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><ul>
+<li><a href="#why">Why do I need to know about arrays</a></li>
+<li><a href="#numpy">Using numpy for arrays</a></li>
+<li><a href="#slicing">Array elements</a></li>
+<li><a href="#useful">Two very useful commands</a></li>
+</ul>
+<ul>
+<li><p><a href="#Exercises">Exercises</a></p>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='why'></a></p>
+<h2 id="Why-do-I-need-to-know-about-arrays?">Why do I need to know about arrays?<a class="anchor-link" href="#Why-do-I-need-to-know-about-arrays?">&#182;</a></h2><p>In the first tutorials, we did nothing more than use python as a glorified calculator. In order to really see the power of computational mathematics, we have to start thinking of what a computer can do that humans can't- or more accurately in this case- don't want to do. Computers are machines, so they are very good at doing lots of things very quickly. Because of this, they are ideal for working with many numbers at once. Say for instance we have an equation which gives the final price of a stock option</p>
+$$ P_{\mathrm{final}} = P_{\mathrm{start}}e^{kt}, \mbox{     where } k \mbox{ is a constant}$$<p>For a given starting price, I can use the equation to compute the final price. But perhaps I need the final price for a whole set of starting prices. Or perhaps I want to know how the value of a given option increases <em>as a function of</em> time- i.e. I need to know the value of $P_{\mathrm{final}}$ for a whole set of values $t$. In these cases, I wouldn't want to do all of the separate calculations by hand.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='numpy'></a></p>
+<h2 id="Using-numpy-for-arrays">Using numpy for arrays<a class="anchor-link" href="#Using-numpy-for-arrays">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As before we import the numpy library (most of the code you write will have this line at the start!). We have already used some of numpy's functions (<code>np.sin</code> and <code>np.cos</code> etc.), but now we are going to use numpy to build 'arrays' (basically lists of numbers, or vectors).</p>
+<p>The basic command to build an array is</p>
+<div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+<p>note that the spacing doesn't matter, but I've spaced this all out so you can see the key components. A one dimensional array (i.e. a row or column vector) is enclosed in [square] brackets, and the <strong>elements</strong> (i.e. the individual numbers in my array) are separated by commas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's define a few arrays to use:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>     <span class="c1"># vector with 4 elements</span>
+<span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>     <span class="c1"># vector with 4 elements</span>
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>   <span class="c1"># vector with 5 elements</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can add or subtract two arrays of the same size</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ 5  8 11 15]
+[ 1  0 -1 -1]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But we'll get an error if we use differently sized arrays</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-5-bd7d45739d8d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span>t<span class="ansi-blue-fg">+</span>z<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ValueError</span>: operands could not be broadcast together with shapes (5,) (4,) </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Other simple operations include adding or multiplying (equivalently, subtracting or dividing) by a constant. <code>y+2</code> adds 2 to each element in the vector while <code>z*3</code> multiplies each element by 3.</p>
+<p>We can also compute the <em>elementwise</em> product of two arrays of the same size using the * operator.
+For two arrays of length $n$: $(a_1,\: a_2,\: \ldots,\: a_n)$ and $(b_1,\: b_2,\: \ldots,\: b_n)$ the elementwise product is the vector $(a_1\times b_1, \: a_2 \times b_2 , \: \ldots, \: a_n \times b_n)$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ 6 16 30 56]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(Note that this is different from the dot product of two vectors which you study in linear algebra. You can do that in python, but we won't look at it in this course)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Any numpy function (<code>np.sin</code>, <code>np.log</code>) etc. can be applied to each element in a arrays:</p>
+<p>e.g. taking</p>
+<div class="highlight"><pre><span></span><span class="n">v</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+<p>gives back an array: $\quad [\sin(1), \: \sin(2), \: \sin(3)]$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1 2 3]
+[ 0.84147098  0.90929743  0.14112001]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='slicing'></a></p>
+<h2 id="Array-elements">Array elements<a class="anchor-link" href="#Array-elements">&#182;</a></h2><p>Having all the information packaged up into one convenient vector is very useful, but sometimes we need to pick out particular elements of vectors. To do this we use square brackets to reference the elements we want. For instance</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+1000
+1000
+-0.5063656411097588
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The first element in an array <code>x</code> is referenced by <code>x[0]</code>. This might seem counterintuitive, but in actual fact, you will see this a lot in mathematical language too: $x_n = 10^n \mbox{ for } n \in \{0,1,2,3\}$, would give $x_0, x_1, x_2$ and $x_3$, which corresponds exactly to what is encoded above. Notice the rather strange looking <code>x[-1]</code> though. This refers to the <em>last</em> element in the array. In this case then, we see that <code>x[3] = x[-1]</code> are the same element. (You can also have <code>x[-2]</code> to mean the second last, and so on).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id='useful'></a></p>
+<h2 id="Two-very-useful-commands">Two very useful commands<a class="anchor-link" href="#Two-very-useful-commands">&#182;</a></h2><p>So far we have been constructing arrays by typing in the values we want. However, ordinarily if we want to compute the result of a calculation for different inputs, we want many more inputs than we would type in by hand.</p>
+<p>For instance, if I want to know the value of $\sin(x)$ for 100 values of $x$ between 0 and $2\pi$, I don't want to work out what the spacing bewteen the points is, calculate the values of x and type them all into an array.</p>
+<p>Thankfully numpy has two built in functions which can help us build arrays. They do similar but subtly different things.</p>
+<p>The first is called <code>np.linspace</code> which builds an array with a <strong>particular number of points</strong> between two limits. The input variables for linspace are the lower limit, the upper limit and the number of points: so if I want 100 equally spaced points for $x$ between 0 and $2\pi$ I type</p>
+
+<pre><code>x=np.linspace(0,2*np.pi,100)
+
+</code></pre>
+<p>The points are equally, or <strong>lin</strong>early <strong>space</strong>d: hence the name: <code>np.linspace</code>. This is really good if we know the <em>range</em> of values that we want, and we don't necessarily care about the spacing.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[ 0.          0.11111111  0.22222222  0.33333333  0.44444444  0.55555556
+  0.66666667  0.77777778  0.88888889  1.        ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The second command is useful when you want to set the spacing between the values. In the above example we wanted 10 points between 0 and 1, which you might think would mean you get an array <code>[0, 0.1, 0.2 ...]</code>. But if you count that up, you'll realise you get to ten points at 0.9, and not 1.0.</p>
+<p>As you can see, this isn't particularly intuitive- if we have to count in our heads how many elements there will be in the array we're likely to get things wrong. A better route for this type of array is to use the command <code>np.arange</code>, which builds an array with a <strong>particular spacing</strong> between two limits. The input variables are the lower limit, the upper limit and the gap between the points. Hence to create the vector above I type</p>
+
+<pre><code>x=np.arange(0,1,0.1)
+
+</code></pre>
+<p>However, there are some subtleties to this: executing this command I actually get</p>
+
+<pre><code>x=np.array([ 0. ,  0.1,  0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9] 
+
+</code></pre>
+<p>I.E. I don't get the last element- 1.0. This is because the upper limit we pass to numpy is not included in the range. So we must instead type</p>
+
+<pre><code>x=np.arange(0,1.1,0.1)
+
+</code></pre>
+<p>or infact replace '1.1' with any $N$, $1.0&lt;N\leq1.1$gives me 10 values.</p>
+<p>This is confusing for people, but if you understand the motivation it might help. Typing</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0 1 2 3 4 5 6 7 8 9]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>gives me 10 values. This is because the default behaviour is to start at 0, and use a spacing of 1. Think of the <code>arange</code> command as performing the operation</p>
+<blockquote><p>start at lower limit, move up in steps, stop before you reach the upper limit.</p>
+</blockquote>
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2>
+<p>Once you have read this information then proceed to try the exercises "2.0 Arrays" and "2.1 Debug Arrays"</p>
+<p> <iframe frameborder="0" width="100%" height="600px" src="https://repl.it/student_embed/classroom/151559/edfe2d7dbb0eaff3ca3985ba5057e4e1"></iframe> </p>
 
 </div>
 </div>
